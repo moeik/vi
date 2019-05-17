@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+  <!--by 别致 2018 568334641-->
+<head>
+  <link rel="icon" type="image/x-icon" href="https://ws3.sinaimg.cn/large/005LHbWaly1g0jwi7vcyij30u00u04qp.jpg" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Vi - Literature page of moeik</title>
+    <link rel="stylesheet" type="text/css" href="static/css/main.css"/>
+</head>
+
+<body>
+<div class="vi">
+    <div class="sidebar">
+        <div class="header">
+            <h1>Vi</h1>
+            <div class="quote">
+                <p class="quote-text animate-init">我也说不准是在什么时候什么地点，</p>
+				<p class="quote-text animate-init">看见了你什么样的风姿，</p>
+				<p class="quote-text animate-init">听到了你什么样的谈吐，</p>
+				<p class="quote-text animate-init">使我开始爱上了你，</p>
+              <p class="quote-text animate-init">那是在好久以前的事了，</p>
+              <p class="quote-text animate-init">等我发觉自己爱上你时，</p>
+              <p class="quote-text animate-init">我已经走了一半路了。</p>
+                <p class="quote-author animate-init">《傲慢与偏见》—— <strong>简·奥斯汀</strong></p>
+            </div>
+        </div>
+        <div class="menu">
+            <a href="https://moeik.cn" class="animate-init">Blog</a>
+            <a href="https://moeik.cn/vi" class="animate-init">Notes</a>
+        </div>
+        <div class="location">
+            <i class="location-icon"></i>
+            <span class="location-text animate-init">Si Chuan - China</span>
+        </div>
+        <div class="relocating">
+            Navigating to: <span class="relocate-location"></span>...
+        </div>
+    </div>
+
+    <div class="content">
+        <span class="close">close</span>
+    </div>
+</div>
+<script type="text/javascript" src="static/js/index.js"></script>
+<script>
+    $(document).ready(function () {
+        var delay = 1;
+        var DELAY_STEP = 200;
+        var animationOptions = { opacity: 1, top: 0};
+
+        $('h1').animate(animationOptions).promise()
+                .pipe(animateMain)
+                .pipe(animateLocationIcon);
+
+        function animateMain() {
+            var dfd = $.Deferred();
+            var els = $('.animate-init');
+            var size = els.size();
+
+            els.each(function (index, el) {
+                delay++;
+                $(el).delay(index * DELAY_STEP)
+                        .animate(animationOptions);
+                (size - 1 === index) && dfd.resolve();
+            });
+            return dfd.promise();
+        }
+
+        function animateLocationIcon() {
+            $('.location-icon').delay(delay * DELAY_STEP).animate({
+                opacity: 1,
+                top: 0
+            }).promise().done(animationQuote);
+        }
+
+        function animationQuote() {}
+
+        $(document.body).on('keydown', function (event) {
+            // Press 'b' key
+            if (event.which === 66) {
+                $('.relocate-location').text('Bookmark Page');
+                $('.relocating').css('opacity', 1);
+
+                window.setTimeout(function () {
+                    window.location.href = '/bookmarks.html';
+                }, 1000);
+            }
+        });
+    });
+</script>
+</body>
+<audio autoplay="autoplay">
+  <source src="https://music.163.com/song/media/outer/url?id=28018075.mp3" type="audio/mp3"/>
+</audio>
+</html>
